@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ransomware Behavior Analyzer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <div class="logo-mark">RBA</div>
+                <h1>Ransomware Behavior Analyzer</h1>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" data-page="upload">Upload</a>
+                <a href="#" class="nav-link" data-page="samples">Samples</a>
+                <a href="#" class="nav-link" data-page="reports">Reports</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Upload Page -->
+            <section id="upload-page" class="page active">
+                <div class="page-header">
+                    <h2>Upload File for Analysis</h2>
+                    <p>Submit a suspicious file for automated malware behavior analysis</p>
+                </div>
+
+                <div class="upload-section">
+                    <div class="upload-area" id="upload-area">
+                        <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <h3>Drag and Drop File Here</h3>
+                        <p>or click to browse your computer</p>
+                        <input type="file" id="file-input" hidden 
+                               accept=".exe,.dll,.zip,.bin,.ps1,.vbs,.js,.bat,.py">
+                        <span class="file-types">Supported formats: .exe, .dll, .zip, .bin, .ps1, .vbs, .js, .bat, .py</span>
+                    </div>
+
+                    <div class="upload-progress hidden" id="upload-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                        <span class="progress-text" id="progress-text">Uploading file...</span>
+                    </div>
+
+                    <div class="upload-result hidden" id="upload-result">
+                        <div class="result-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                        </div>
+                        <h3>File Uploaded Successfully</h3>
+                        <div class="result-details">
+                            <p><strong>Sample ID:</strong> <span id="result-sample-id"></span></p>
+                            <p><strong>Hash:</strong> <span id="result-hash"></span></p>
+                            <p><strong>Status:</strong> <span id="result-status"></span></p>
+                        </div>
+                        <button class="btn btn-primary" id="view-analysis">View Analysis</button>
+                        <button class="btn btn-secondary" id="upload-another">Upload Another File</button>
+                    </div>
+                </div>
+
+                <div class="simulation-banner">
+                    <div class="banner-badge">DEMO MODE</div>
+                    <div class="banner-text">
+                        <strong>Simulation Mode Active</strong>
+                        <p>This system uses simulated malware behavior and test samples. No actual malware is executed.</p>
+                    </div>
+                </div>
+
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <h4>Isolated Environment</h4>
+                        <p>All files analyzed in completely isolated sandbox environments</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="1"/>
+                                <path d="M12 1v6m0 6v6"/>
+                                <path d="M4.22 4.22l4.24 4.24m5.08 5.08l4.24 4.24"/>
+                                <path d="M1 12h6m6 0h6"/>
+                                <path d="M4.22 19.78l4.24-4.24m5.08-5.08l4.24-4.24"/>
+                            </svg>
+                        </div>
+                        <h4>Rapid Analysis</h4>
+                        <p>Static analysis in seconds, dynamic analysis in minutes</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="12" y1="13" x2="8" y2="13"/>
+                                <line x1="12" y1="17" x2="8" y2="17"/>
+                            </svg>
+                        </div>
+                        <h4>Professional Reports</h4>
+                        <p>Detailed threat analysis with MITRE ATT&CK framework mapping</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Samples Page -->
+            <section id="samples-page" class="page">
+                <div class="page-header">
+                    <h2>Analysis Samples</h2>
+                    <p>View all submitted samples and their analysis results</p>
+                </div>
+
+                <div class="samples-filters">
+                    <select id="status-filter">
+                        <option value="">All Status</option>
+                        <option value="analyzing">Analyzing</option>
+                        <option value="completed">Completed</option>
+                        <option value="error">Error</option>
+                    </select>
+                    <button class="btn btn-secondary" id="refresh-samples">Refresh</button>
+                </div>
+
+                <div class="samples-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Filename</th>
+                                <th>Submitted</th>
+                                <th>Status</th>
+                                <th>Threat Type</th>
+                                <th>Risk Level</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="samples-tbody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="no-samples hidden" id="no-samples">
+                    <p>No samples found. Upload a file to begin analysis.</p>
+                </div>
+            </section>
+
+            <!-- Reports Page -->
+            <section id="reports-page" class="page">
+                <div class="page-header">
+                    <h2>Analysis Report</h2>
+                    <p id="report-subtitle">Select a sample to view detailed analysis</p>
+                </div>
+
+                <div class="report-container" id="report-container">
+                    <div class="no-report" id="no-report">
+                        <p>Select a sample from the Samples page to view its report.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Analysis Modal -->
+    <div class="modal hidden" id="analysis-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Analysis in Progress</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="analysis-status">
+                    <div class="spinner"></div>
+                    <p id="analysis-status-text">Analyzing sample...</p>
+                </div>
+                <div class="analysis-steps">
+                    <div class="step" id="step-upload">
+                        <span class="step-number">1</span>
+                        <span class="step-text">File Upload</span>
+                        <span class="step-status">Complete</span>
+                    </div>
+                    <div class="step" id="step-static">
+                        <span class="step-number">2</span>
+                        <span class="step-text">Static Analysis</span>
+                        <span class="step-status">In Progress</span>
+                    </div>
+                    <div class="step" id="step-dynamic">
+                        <span class="step-number">3</span>
+                        <span class="step-text">Dynamic Analysis</span>
+                        <span class="step-status">Pending</span>
+                    </div>
+                    <div class="step" id="step-report">
+                        <span class="step-number">4</span>
+                        <span class="step-text">Report Generation</span>
+                        <span class="step-status">Pending</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>Ransomware Behavior Analyzer v1.0</p>
+            <p>For educational and authorized security research only</p>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

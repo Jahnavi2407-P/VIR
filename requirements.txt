@@ -1,0 +1,36 @@
+# Python Requirements for Ransomware Behavior Analyzer
+
+# Backend
+fastapi>=0.100.0
+uvicorn>=0.22.0
+aiosqlite>=0.19.0
+python-multipart>=0.0.6
+
+# Static Analysis
+pefile>=2023.2.7
+yara-python>=4.3.0
+
+# Dynamic Analysis (optional)
+psutil>=5.9.0
+
+# Report Generation
+jinja2>=3.1.2
+weasyprint>=59.0  # For PDF generation (optional)
+
+# Security
+python-magic>=0.4.27
+
+# Utilities
+aiofiles>=23.1.0
+httpx>=0.24.0
+
+# Development
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Windows-specific (optional)
+# pywin32>=306  # Uncomment on Windows
+# wmi>=1.5.1    # Uncomment on Windows
+
+# Linux-specific (optional)
+# inotify>=0.2.10  # Uncomment on Linux
