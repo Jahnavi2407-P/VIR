@@ -2,7 +2,7 @@
  * API Client for Ransomware Behavior Analyzer
  */
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = 'https://vir-i0vs.onrender.com';
 
 class APIClient {
     constructor(baseUrl = API_BASE_URL) {
